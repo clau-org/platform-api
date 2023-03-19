@@ -1,4 +1,3 @@
-import "https://deno.land/x/dotenv/load.ts";
 import { mainApp } from "./routers/index.ts";
 import { logger } from "./utils/logger.ts";
 
