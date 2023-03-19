@@ -1,0 +1,11 @@
+{
+  "imports": {
+    "cors": "https://deno.land/x/cors@v1.2.2/mod.ts",
+    "oak": "https://deno.land/x/oak@v12.1.0/mod.ts",
+    "pusher": "https://esm.sh/pusher@5.1.2"
+  },
+  "tasks": {
+    "dev": "deno run -A --watch src/main.ts",
+    "prisma": "deno run -A npm:prisma@^4.5 generate --data-proxy --schema=./src/schema/schema.prisma"
+  }
+}
