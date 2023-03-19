@@ -2,18 +2,12 @@ import { Router, Context, Status } from "oak";
 import { logger } from "../utils/logger.ts";
 import { validateRequest } from "../middleware/validate.ts";
 import { z } from "z";
-import { prisma } from "../schema/prisma.ts";
+import { models } from "../schema/models.ts";
+import { getFakeName } from "../tests/faker.ts";
 
 const authRouter = new Router({
   prefix: "/auth",
 });
-
-const getFakeName = async () => {
-  const res = await fetch("https://api.namefake.com");
-  const { name: fakeName } = await res.json();
-  logger.debug("[METHOD getFakeName]", { fakeName });
-  return fakeName;
-};
 
 const authCreateSchema = z
   .object({
@@ -36,7 +30,7 @@ authRouter.all(
   "/create",
   validateRequest(authCreateSchema),
   async (ctx: Context) => {
-    const { users } = prisma;
+    const { users } = models;
 
     let { name = await getFakeName(), email, phone } = ctx.state.requestData;
 

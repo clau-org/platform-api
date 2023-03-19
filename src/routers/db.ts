@@ -1,23 +1,17 @@
 import { Router } from "oak";
 import { logger } from "../utils/logger.ts";
-import { prisma } from "../schema/prisma.ts";
+import { models } from "../schema/models.ts";
+import { getFakeName } from "../tests/faker.ts";
 
 const dbRouter = new Router();
 
 dbRouter.all("/db", async (ctx) => {
-  const { users } = prisma;
-
-  const getFakeName = async () => {
-    const res = await fetch("https://api.namefake.com");
-    const { name: fakeName } = await res.json();
-
-    logger.info({ fakeName });
-    return fakeName;
-  };
+  const { users } = models;
 
   const fakeName: string = await getFakeName();
+
   const prismaResponse = await users.create({
-    data: { name: fakeName },
+    data: { name: await getFakeName() },
   });
 
   logger.info(typeof prismaResponse);
