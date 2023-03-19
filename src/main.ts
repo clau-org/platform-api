@@ -2,7 +2,7 @@ import { mainApp } from "./routers/index.ts";
 import { logger } from "./utils/logger.ts";
 
 mainApp.addEventListener("listen", ({ port, secure }) => {
-  logger.warn(
+  logger.info(
     `Server started on ${secure ? "https://" : "http://"}localhost:${port}`
   );
 });

@@ -32,17 +32,36 @@ authRouter.all(
   async (ctx: Context) => {
     const { users } = models;
 
-    let { name = await getFakeName(), email, phone } = ctx.state.requestData;
+    let { name, email, phone } = ctx.state.requestData;
 
-    const user = await users.create({
-      data: {
-        name,
-        email,
-        phone,
-      },
-    });
+    let isUnique = true;
+    let user = null;
 
-    logger.info("[USER CREATED]", { user });
+    if (email) {
+      user = await users.findFirst({ where: { email } });
+
+      if (user) isUnique = false;
+    }
+
+    if (phone) {
+      user = await users.findFirst({ where: { phone } });
+
+      if (user) isUnique = false;
+    }
+
+    if (!user) {
+      user = await users.create({
+        data: {
+          name,
+          email,
+          phone,
+        },
+      });
+
+      logger.info("[USER CREATED]", { user });
+    } else {
+      logger.info("[USER ALREADY EXIST]", { user });
+    }
 
     ctx.response.body = {
       user,

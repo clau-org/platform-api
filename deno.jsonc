@@ -11,6 +11,7 @@
     "dev": "deno run -A --watch src/main.ts",
     "preview": "deno run -A src/main.ts",
     "deploy": "deployctl deploy --project='clau-platform-api' --prod --exclude='node_modules' --import-map='deno.jsonc' src/main.ts ",
-    "prisma": "deno run -A npm:prisma@latest generate --data-proxy --schema=./src/schema/schema.prisma"
+    "prisma": "deno run -A npm:prisma@latest generate --data-proxy --schema=./src/schema/schema.prisma",
+    "prisma:push": "deno run -A npm:prisma@latest db push --schema=./src/schema/schema.prisma"
   }
 }
