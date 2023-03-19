@@ -39,7 +39,6 @@ function validateRequest(schema?: any) {
       ctx.state.requestData = data;
 
       await next();
-
     } catch (error) {
       if (error instanceof ZodError) {
         const validationError: ValidationError = {
@@ -47,6 +46,9 @@ function validateRequest(schema?: any) {
             message: err.message,
           })),
         };
+
+        logger.error("[DATA VALIDATION ERROR]", validationError);
+
         ctx.response.status = 400;
         ctx.response.body = validationError;
       } else {

@@ -219,6 +219,7 @@
     "https://deno.land/std@0.178.0/streams/writer_from_stream_writer.ts": "31126a6bf2e678c5a718011d4831dbe75dbdbd885965d3dbd5dd105e6f20f976",
     "https://deno.land/std@0.178.0/streams/zip_readable_streams.ts": "9eb82070d83055fe6f077192fb204dc7612695a4b330148e9aa376df1a65e708",
     "https://deno.land/std@0.178.0/types.d.ts": "220ed56662a0bd393ba5d124aa6ae2ad36a00d2fcbc0e8666a65f4606aaa9784",
+    "https://deno.land/std@0.180.0/fmt/colors.ts": "938c5d44d889fb82eff6c358bea8baa7e85950a16c9f6dae3ec3a7a729164471",
     "https://deno.land/x/cors@v1.2.2/abcCors.ts": "cdf83a7eaa69a1bf3ab910d18b9422217902fac47601adcaf0afac5a61845d48",
     "https://deno.land/x/cors@v1.2.2/attainCors.ts": "7d6aba0f942495cc31119604e0895c9bb8edd8f8baa7fe78e6c655bd0b4cbf59",
     "https://deno.land/x/cors@v1.2.2/cors.ts": "0e2d9167e3685f9bcf48f565e312b6e1883fa458f7337e5ce7bc2e3b29767980",

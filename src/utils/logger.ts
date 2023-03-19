@@ -1,3 +1,5 @@
+import * as Colors from "Colors";
+
 interface ILogger {
   debug(message: string, ...args: any[]): void;
   info(message: string, ...args: any[]): void;
@@ -26,27 +28,46 @@ class Logger implements ILogger {
   }
 
   private log(level: string, ...args: any[]) {
-    const colors: any = {
-      debug: "blue",
-      info: "green",
-      warn: "orange",
-      error: "red",
+    const ColorLog: any = {
+      debug: Colors.blue,
+      info: Colors.green,
+      warn: Colors.yellow,
+      error: Colors.red,
     };
 
-    const logStyles = `color: ${colors[level] || "black"}; font-weight: bold;`;
-    const timeStyles = "color: gray; font-style: italic;";
+    let LOG_TIME = `[${new Date().toISOString()}]`;
+    LOG_TIME = Colors.gray(LOG_TIME);
+    LOG_TIME = Colors.italic(LOG_TIME);
 
-    console.log(
-      `%c[${new Date().toISOString()}]%c [%c${level.toUpperCase()}%c] %c${
-        this.prefix
-      }`,
-      timeStyles,
-      "",
-      logStyles,
-      "",
-      "",
-      ...args
-    );
+    let LOG_LEVEL = level.toUpperCase();
+    LOG_LEVEL = ColorLog[level](LOG_LEVEL);
+    LOG_LEVEL = Colors.bold(LOG_LEVEL);
+    LOG_LEVEL = `[${LOG_LEVEL}]`;
+
+    let LOG_PREFIX = this.prefix;
+    LOG_PREFIX = Colors.bold(LOG_PREFIX);
+    LOG_PREFIX = Colors.bgBrightBlack(LOG_PREFIX);
+    LOG_PREFIX = `[${LOG_PREFIX}]`;
+
+    let logArgs = args.map((arg) => {
+      if (typeof arg === "object" && arg !== null) {
+        try {
+          return JSON.stringify(arg, null, 2);
+        } catch (e) {
+          return arg;
+        }
+      } else if (
+        typeof arg === "string" &&
+        arg.startsWith("[") &&
+        arg.endsWith("]")
+      ) {
+        const innerText: any = arg.slice(1, -1);
+        return `[${Colors.bgBrightBlack(innerText)}]`
+      }
+      return arg;
+    });
+
+    console.log(LOG_TIME, LOG_LEVEL, LOG_PREFIX, ...logArgs);
   }
 
   private shouldLog(level: LogLevel) {
@@ -93,6 +114,6 @@ class Logger implements ILogger {
   }
 }
 
-const logger = new Logger("[CLAU]");
+const logger = new Logger("CLAU");
 
 export { logger };
