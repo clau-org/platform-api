@@ -2,7 +2,9 @@
   "imports": {
     "cors": "https://deno.land/x/cors@v1.2.2/mod.ts",
     "oak": "https://deno.land/x/oak@v12.1.0/mod.ts",
-    "pusher": "https://esm.sh/pusher@5.1.2"
+    "oak/helpers": "https://deno.land/x/oak@v12.1.0/helpers.ts",
+    "pusher": "https://esm.sh/pusher@5.1.2",
+    "z": "https://deno.land/x/zod@v3.21.4/mod.ts"
   },
   "tasks": {
     "dev": "deno run -A --watch src/main.ts",

@@ -4,7 +4,7 @@ import { logger } from "../utils/logger.ts";
 
 const dbRouter = new Router();
 
-dbRouter.get("/db", async (ctx) => {
+dbRouter.all("/db", async (ctx) => {
   const CLAU_PLATFORM_PROXY_DB =
     "prisma://aws-us-east-1.prisma-data.com/?api_key=mY4engKpoOtH3QVxb9NWeTZ_NWpEeoT6CcLwsDAtpsefXTby_mpAjYXQj1qLL0yF";
 
@@ -13,9 +13,6 @@ dbRouter.get("/db", async (ctx) => {
       db: { url: CLAU_PLATFORM_PROXY_DB },
     },
   });
-
-  const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
-  const data = await res.json();
 
   const getFakeName = async () => {
     const res = await fetch("https://api.namefake.com");

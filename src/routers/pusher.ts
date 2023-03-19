@@ -14,7 +14,7 @@ const pusher = new Pusher({
 
 const pusherRouter = new Router();
 
-pusherRouter.get("/pusher", async (ctx) => {
+pusherRouter.all("/pusher", async (ctx) => {
   let pResponse = null;
 
   try {

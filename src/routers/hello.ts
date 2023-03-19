@@ -2,7 +2,7 @@ import { Router } from "oak";
 
 const helloRouter = new Router();
 
-helloRouter.get("/", (ctx) => {
+helloRouter.all("/", (ctx) => {
   ctx.response.body = {
     message: `Hello from PLATFORM-API`,
   };
