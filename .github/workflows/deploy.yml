@@ -14,7 +14,7 @@ on:
         options:
           - prod
 
-run-name: "Deploy to stage: '${{ github.ref == 'refs/heads/main' && inputs.stage || 'prod' }}' - '${{ github.event.head_commit.message }}'"
+run-name: "Deploy to '${{ github.ref == 'refs/heads/main' && inputs.stage || 'prod' }}' with message '${{ github.event.head_commit.message }}'"
 
 env:
   NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -22,9 +22,9 @@ env:
   DENO_DEPLOY_TOKEN: ${{ secrets.DENO_DEPLOY_TOKEN }}
 
 jobs:
-  build-deploy-deno:
+  build-deploy:
     runs-on: ubuntu-latest
-    name: Deploy API on Deno Deploy
+    name: Deploy API
 
     steps:
       - name: Checkout code 📁
@@ -41,8 +41,8 @@ jobs:
       - name: Setup Prisma ⚒️
         run: deno task prisma
 
-      - name: Preview - Deno 👀
+      - name: Preview 👀
         run: deno task preview & sleep 2 && kill $!
 
-      - name: Deploy - Deno 🚀
+      - name: Deploy 🚀
         run: deno task deploy
