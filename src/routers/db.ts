@@ -1,18 +1,11 @@
 import { Router } from "oak";
-import { PrismaClient } from "../schema/generated/client/deno/edge.ts";
 import { logger } from "../utils/logger.ts";
+import { prisma } from "../schema/prisma.ts";
 
 const dbRouter = new Router();
 
 dbRouter.all("/db", async (ctx) => {
-  const CLAU_PLATFORM_PROXY_DB =
-    "prisma://aws-us-east-1.prisma-data.com/?api_key=mY4engKpoOtH3QVxb9NWeTZ_NWpEeoT6CcLwsDAtpsefXTby_mpAjYXQj1qLL0yF";
-
-  const prisma = new PrismaClient({
-    datasources: {
-      db: { url: CLAU_PLATFORM_PROXY_DB },
-    },
-  });
+  const { users } = prisma;
 
   const getFakeName = async () => {
     const res = await fetch("https://api.namefake.com");
@@ -23,7 +16,7 @@ dbRouter.all("/db", async (ctx) => {
   };
 
   const fakeName: string = await getFakeName();
-  const prismaResponse = await prisma.users.create({
+  const prismaResponse = await users.create({
     data: { name: fakeName },
   });
 

@@ -1,11 +1,8 @@
 import { Router, Context, Status } from "oak";
-import { PrismaClient } from "../schema/generated/client/deno/edge.ts";
 import { logger } from "../utils/logger.ts";
 import { validateRequest } from "../middleware/validate.ts";
 import { z } from "z";
-
-const CLAU_PLATFORM_PROXY_DB =
-  "prisma://aws-us-east-1.prisma-data.com/?api_key=mY4engKpoOtH3QVxb9NWeTZ_NWpEeoT6CcLwsDAtpsefXTby_mpAjYXQj1qLL0yF";
+import { prisma } from "../schema/prisma.ts";
 
 const authRouter = new Router({
   prefix: "/auth",
@@ -39,15 +36,11 @@ authRouter.all(
   "/create",
   validateRequest(authCreateSchema),
   async (ctx: Context) => {
+    const { users } = prisma;
+
     let { name = await getFakeName(), email, phone } = ctx.state.requestData;
 
-    const prisma = new PrismaClient({
-      datasources: {
-        db: { url: CLAU_PLATFORM_PROXY_DB },
-      },
-    });
-
-    const user = await prisma.users.create({
+    const user = await users.create({
       data: {
         name,
         email,
