@@ -1,6 +1,6 @@
 import { Router } from "oak";
 import { logger } from "../utils/logger.ts";
-import { pusher } from "../channels/pusher.ts";
+import { pusher } from "../modules/channels/pusher.ts";
 import { getFakeName } from "../tests/faker.ts";
 
 const pusherRouter = new Router();
