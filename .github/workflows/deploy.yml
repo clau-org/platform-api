@@ -20,6 +20,7 @@ env:
   NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   NODE_OPTIONS: "--max_old_space_size=4096"
   DENO_DEPLOY_TOKEN: ${{ secrets.DENO_DEPLOY_TOKEN }}
+  DENO_AUTH_TOKENS:  "${{ secrets.GITHUB_TOKEN }}@raw.githubusercontent.com"
 
 jobs:
   build-deploy:

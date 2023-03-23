@@ -4,10 +4,10 @@
     "oak": "https://deno.land/x/oak@v12.1.0/mod.ts",
     "oak/helpers": "https://deno.land/x/oak@v12.1.0/helpers.ts",
     "pusher": "https://esm.sh/pusher@5.1.2",
-    "z": "https://deno.land/x/zod@v3.21.4/mod.ts",
-    "Colors": "https://deno.land/std@0.180.0/fmt/colors.ts"
+    "z": "https://deno.land/x/zod@v3.21.4/mod.ts"
   },
   "tasks": {
+    "debug": "deno run -A --watch -L debug src/main.ts",
     "dev": "deno run -A --watch src/main.ts",
     "preview": "deno run -A src/main.ts",
     "deploy": "deployctl deploy --project='clau-platform-api' --prod --exclude='node_modules' --import-map='deno.jsonc' src/main.ts ",
